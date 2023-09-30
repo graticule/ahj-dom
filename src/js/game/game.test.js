@@ -13,17 +13,15 @@ test("check number of cells", () => {
 });
 
 test("change position test", () => {
-  expect(element.querySelectorAll('.game__cell_active').length).toBe(0);
-  for(let i=0; i < 10; i++){
-    const prev = element.querySelector('.game__cell_active');  
+  expect(element.querySelectorAll(".game__cell_active").length).toBe(0);
+  let prev = element.querySelector(".game__cell_active");
+  expect(prev).toBeNull();
+  game.changePosition();
+  for (let i = 0; i < 10; i++) {
+    prev = element.querySelector(".game__cell_active");
     game.changePosition();
-    const next = element.querySelector('.game__cell_active');
-    if(prev){
-      expect( prev.isEqualNode(next)).toBeFalsy();
-    } else {
-      expect(prev).toBeNull();
-      expect(next).not.toBeNull();
-    }
-    expect(element.querySelectorAll('.game__cell_active').length).toBe(1);
+    const next = element.querySelector(".game__cell_active");
+    expect(prev.isEqualNode(next)).toBeFalsy();
+    expect(element.querySelectorAll(".game__cell_active").length).toBe(1);
   }
-})
+});
